@@ -1,6 +1,11 @@
 $(document).ready(function() {
 // Golbal Variables
-var topics = ["Guitars", "The Office", "Baseball", "Adult Swim", "Harry Potter", "Car Repair"];
+var topics = ["Guitars", "The Office", "Baseball", "Adult Swim", "Harry Potter", "Coding"];
+var stillImgUrl = '';
+var imgURL = '';
+var gifCondition = '';
+var stillUrl = '';
+var animateUrl = '';
 
 // displayGifInfo function re-renders the HTML to display the appropriate content
 var displayGifInfo = function () {
@@ -16,6 +21,9 @@ var displayGifInfo = function () {
     }).then(function(response) {
       $("#show-view").empty();
       for (var i = 0; i < 10; i++) {
+      // Retrieving the URL for the still and regular animated image
+      stillImgUrl = response['data'][i]['images']['fixed_height_still']['url'];
+      imgURL = response['data'][i]['images']['fixed_height']['url'];
       // Creating a div to hold the gifs
       var gifDiv = $("<div class='gifs'>");
       // Storing the rating data
@@ -24,10 +32,14 @@ var displayGifInfo = function () {
       var pOne = $("<p>").text("Rating: " + rating);
       // Displaying the rating
       gifDiv.append(pOne);
-      // Retrieving the URL for the image
-      var imgURL = response['data'][i]['images']['fixed_height']['url'];
       // Creating an element to hold the image
-      var image = $("<img>").attr("src", imgURL);
+      var image = $("<img>");
+      //Give img element stillImgUrl, animated  & src attribute
+      image.attr('data-still', stillImgUrl);
+      image.attr('data-animate', imgURL);
+      image.attr('src', stillImgUrl);
+      image.attr('data-type', 'still');
+      image.addClass('gifImage');
       // Appending the image
       gifDiv.append(image);
       // Putting the entire gif above the previous gifs
@@ -35,6 +47,29 @@ var displayGifInfo = function () {
           };
       });
 };
+
+var gifAnimate = function() {
+  //sets gifCondition to either still or animate
+  gifCondition = $(this).data('type');
+  stillUrl = $(this).data('still');
+  animateUrl = $(this).data('animate');
+  if (gifCondition === 'still') {
+      //Changes the gif to an animated image by switching the URL
+      $(this).attr('src', animateUrl);
+      //Switch the data-type to animate
+      $(this).data('type', 'animate');
+      //Testing
+      console.log(gifCondition);
+  } else if (gifCondition === 'animate') {
+      //Change src to still
+      $(this).attr('src', stillUrl);
+      //Switch the data-type to still
+      $(this).data('type', 'still');
+      //Testing
+      console.log(gifCondition);
+  };
+};
+
       // Function for displaying movie data
       function renderButtons() {
 
@@ -56,8 +91,8 @@ var displayGifInfo = function () {
           a.text(topics[i]);
           // Adding the button to the HTML
           $("#buttons-view").append(a);
-        }
-      }
+        };
+      };
 
       // This function handles events where one button is clicked
       $("#add-show").on("click", function(event) {
@@ -76,6 +111,7 @@ var displayGifInfo = function () {
 
         // Adding a click event listener to all elements with a class of "show"
         $(document).on("click", ".show", displayGifInfo);
+        $(document).on("click", ".gifImage", gifAnimate);
         
         // Calling the renderButtons function at least once to display the initial list of topics
         renderButtons();
