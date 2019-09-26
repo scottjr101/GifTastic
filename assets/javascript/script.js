@@ -1,45 +1,35 @@
+$(document).ready(function() {
 // Golbal Variables
-var topics = ["Space Ghost", "Rick and Morty", "Sealab 2021", "Tim and Eric"];
+var topics = ["Guitars", "Rick and Morty", "Baseball", "Cars"];
 
 // displayMovieInfo function re-renders the HTML to display the appropriate content
-function displayMovieInfo() {
+var displayMovieInfo = function () {
 
     var movie = $(this).attr("data-name");
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&q=" + movie + "&limit=10&offset=0&rating=G&lang=en";
+    
 
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-
+      for (var i = 0; i < 10; i++) {
       // Creating a div to hold the movie
       var movieDiv = $("<div class='movie'>");
       // Storing the rating data
-      var rating = response.Rated;
+      var rating = response['data'][i]['rating'];
       // Creating an element to have the rating displayed
       var pOne = $("<p>").text("Rating: " + rating);
       // Displaying the rating
       movieDiv.append(pOne);
-      // Storing the release year
-      var released = response.Released;
-      // Creating an element to hold the release year
-      var pTwo = $("<p>").text("Released: " + released);
-      // Displaying the release year
-      movieDiv.append(pTwo);
-      // Storing the plot
-      var plot = response.Plot;
-      // Creating an element to hold the plot
-      var pThree = $("<p>").text("Plot: " + plot);
-      // Appending the plot
-      movieDiv.append(pThree);
       // Retrieving the URL for the image
-      var imgURL = response.Poster;
+      var imgURL = response['data'][i]['images']['fixed_height']['url'];
       // Creating an element to hold the image
       var image = $("<img>").attr("src", imgURL);
       // Appending the image
       movieDiv.append(image);
-
+      };
       // Putting the entire movie above the previous movies
       $("#show-view").prepend(movieDiv);
     });
@@ -86,6 +76,8 @@ function displayMovieInfo() {
 
         // Adding a click event listener to all elements with a class of "movie-btn"
         $(document).on("click", ".show", displayMovieInfo);
-
+        
         // Calling the renderButtons function at least once to display the initial list of topics
         renderButtons();
+
+});        
