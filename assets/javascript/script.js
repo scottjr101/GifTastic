@@ -1,12 +1,12 @@
 $(document).ready(function() {
 // Golbal Variables
-var topics = ["Guitars", "Rick and Morty", "Baseball", "Cars"];
+var topics = ["Guitars", "The Office", "Baseball", "Adult Swim", "Harry Potter", "Car Repair"];
 
-// displayMovieInfo function re-renders the HTML to display the appropriate content
-var displayMovieInfo = function () {
+// displayGifInfo function re-renders the HTML to display the appropriate content
+var displayGifInfo = function () {
 
     var movie = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&q=" + movie + "&limit=10&offset=0&rating=G&lang=en";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&q=" + movie + "&limit=10&offset=0&rating=PG&lang=en";
     
 
     // Creating an AJAX call for the specific movie button being clicked
@@ -14,27 +14,27 @@ var displayMovieInfo = function () {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+      $("#show-view").empty();
       for (var i = 0; i < 10; i++) {
-      // Creating a div to hold the movie
-      var movieDiv = $("<div class='movie'>");
+      // Creating a div to hold the gifs
+      var gifDiv = $("<div class='gifs'>");
       // Storing the rating data
       var rating = response['data'][i]['rating'];
       // Creating an element to have the rating displayed
       var pOne = $("<p>").text("Rating: " + rating);
       // Displaying the rating
-      movieDiv.append(pOne);
+      gifDiv.append(pOne);
       // Retrieving the URL for the image
       var imgURL = response['data'][i]['images']['fixed_height']['url'];
       // Creating an element to hold the image
       var image = $("<img>").attr("src", imgURL);
       // Appending the image
-      movieDiv.append(image);
-      };
-      // Putting the entire movie above the previous movies
-      $("#show-view").prepend(movieDiv);
-    });
-
-  }
+      gifDiv.append(image);
+      // Putting the entire gif above the previous gifs
+      $("#show-view").prepend(gifDiv);
+          };
+      });
+};
       // Function for displaying movie data
       function renderButtons() {
 
@@ -74,8 +74,8 @@ var displayMovieInfo = function () {
         renderButtons();
         });
 
-        // Adding a click event listener to all elements with a class of "movie-btn"
-        $(document).on("click", ".show", displayMovieInfo);
+        // Adding a click event listener to all elements with a class of "show"
+        $(document).on("click", ".show", displayGifInfo);
         
         // Calling the renderButtons function at least once to display the initial list of topics
         renderButtons();
