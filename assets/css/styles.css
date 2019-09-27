@@ -5,3 +5,11 @@ button, div, form, input {
 label {
   padding-left: 10px;
 }
+
+.card-body {
+  padding: 0px;
+}
+
+body {
+  background: url(../images/cork-board.png);
+}

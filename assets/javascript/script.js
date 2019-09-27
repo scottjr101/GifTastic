@@ -22,28 +22,29 @@ var displayGifInfo = function () {
       $("#show-view").empty();
       for (var i = 0; i < 10; i++) {
       // Retrieving the URL for the still and regular animated image
-      stillImgUrl = response['data'][i]['images']['fixed_height_still']['url'];
-      imgURL = response['data'][i]['images']['fixed_height']['url'];
+      stillImgUrl = response['data'][i]['images']['fixed_width_still']['url'];
+      imgURL = response['data'][i]['images']['fixed_width']['url'];
       // Creating a div to hold the gifs
-      var gifDiv = $("<div class='gifs'>");
-      // Storing the rating data
-      var rating = response['data'][i]['rating'];
-      // Creating an element to have the rating displayed
-      var pOne = $("<p>").text("Rating: " + rating);
-      // Displaying the rating
-      gifDiv.append(pOne);
+      var gifDivCard = $("<div class='card' style='width: 250px;'>");
       // Creating an element to hold the image
-      var image = $("<img>");
+      var image = $("<img class='gifImage' 'card-img-top' style='height:230px;'>");
       //Give img element stillImgUrl, animated  & src attribute
       image.attr('data-still', stillImgUrl);
       image.attr('data-animate', imgURL);
       image.attr('src', stillImgUrl);
       image.attr('data-type', 'still');
-      image.addClass('gifImage');
       // Appending the image
-      gifDiv.append(image);
+      gifDivCard.append(image);
+      var gifDivCardBody = $("<div class='card-body'>");
+      // Storing the rating data
+      var rating = response['data'][i]['rating'];
+      // Creating an element to have the rating displayed
+      var pOne = $("<p>").text("Rating: " + rating);
+      // Displaying the rating
+      gifDivCardBody.append(pOne);
+      gifDivCard.append(gifDivCardBody);
       // Putting the entire gif above the previous gifs
-      $("#show-view").prepend(gifDiv);
+      $("#show-view").prepend(gifDivCard);
           };
       });
 };
@@ -58,15 +59,11 @@ var gifAnimate = function() {
       $(this).attr('src', animateUrl);
       //Switch the data-type to animate
       $(this).data('type', 'animate');
-      //Testing
-      console.log(gifCondition);
   } else if (gifCondition === 'animate') {
       //Change src to still
       $(this).attr('src', stillUrl);
       //Switch the data-type to still
       $(this).data('type', 'still');
-      //Testing
-      console.log(gifCondition);
   };
 };
 
