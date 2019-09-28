@@ -6,7 +6,9 @@ button, form, input {
 label {
   padding-left: 10px;
 }
-
+.col-8 {
+  padding-top: 20px;
+}
 .card-body {
   text-align: center;
   padding: 0px;
