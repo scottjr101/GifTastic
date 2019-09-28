@@ -1,5 +1,6 @@
-button, div, form, input {
+button, form, input {
   margin: 10px;
+  font-family: 'Lobster', cursive;
 }
 
 label {
@@ -7,9 +8,37 @@ label {
 }
 
 .card-body {
+  text-align: center;
   padding: 0px;
+  font-family: 'El Messiri', sans-serif;
 }
 
 body {
   background: url(../images/cork-board.png);
+}
+
+.card {
+  display: inline-block;
+  margin: 15px 15px 0px 0px;
+}
+h1 {
+  font-family: 'El Messiri', sans-serif;
+  font-weight: bold;
+  margin-top: 10px;
+}
+h3 {
+  font-family: 'El Messiri', sans-serif;
+  font-weight: bold;
+}
+p {
+  margin: 3px 0px 3px 0px;
+}
+
+.gifContainer {
+  text-align: center;
+}
+
+.buttonContainer {
+  text-align: center;
+  padding-left: 0px;
 }

@@ -27,7 +27,7 @@ var displayGifInfo = function () {
       // Creating a div to hold the gifs
       var gifDivCard = $("<div class='card' style='width: 250px;'>");
       // Creating an element to hold the image
-      var image = $("<img class='gifImage' 'card-img-top' style='height:230px;'>");
+      var image = $("<img class='gifImage card-img-top' style='height:230px;'>");
       //Give img element stillImgUrl, animated  & src attribute
       image.attr('data-still', stillImgUrl);
       image.attr('data-animate', imgURL);
@@ -79,9 +79,7 @@ var gifAnimate = function() {
 
           // Then dynamicaly generating buttons for each movie in the array.
           // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-          var a = $("<button>");
-          // Adding a class
-          a.addClass("show");
+          var a = $("<button type='button' class='show btn btn-secondary btn-lg'>");
           // Adding a data-attribute with a value of the movie at index i
           a.attr("data-name", topics[i]);
           // Providing the button's text with a value of the movie at index i
