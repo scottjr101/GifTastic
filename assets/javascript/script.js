@@ -40,7 +40,7 @@ var displayGifInfo = function () {
       var rating = response['data'][i]['rating'];
       // Creating an element to have the rating displayed
       var pOne = $("<p>").text("Rating: " + rating);
-      // Displaying the rating
+      // Displaying the rating3
       gifDivCardBody.append(pOne);
       gifDivCard.append(gifDivCardBody);
       // Putting the entire gif above the previous gifs
