@@ -1,12 +1,20 @@
 # GifTastic
 
-### Overview
+**Creator**: `Scott Ladd`
 
-An app that pulls the Giphy API to allow users to view gifs.  
+**Created on**: `Sep 30th 2019`
 
-### Objective
+- - -
+
+### ABOUT THE APP
+
+An app that pulls the Giphy API to make a dynamic web page that populates with gifs of your choice.
+
+### HOW TO USE THE APP
 
 You can use the provided topic buttons on the left or add a button from the right side of the page. Once clicked the gifs will appear on the body of the page. Then once the gifs are loaded you can click on the them to make them play.
+
+- - -
 
 ### Deployed Site
 
@@ -14,3 +22,14 @@ You can use the provided topic buttons on the left or add a button from the righ
 
 ![GifTastic](assets/images/giftastic.png)
 
+- - -
+
+## TECHNOLOGIES USED
+* Javascript
+* jQuery
+* CSS
+* HTML
+* GIPHY API
+* BootStrap
+* Git
+* GitHub
